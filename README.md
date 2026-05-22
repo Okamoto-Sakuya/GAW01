@@ -9,7 +9,6 @@ Unity 6 + URP + 新 Input System を使用した
 Unityプログラム授業
 「Unity Game A Week」向け教材として制作しています。
 
----
 
 # ゲーム概要
 
@@ -19,7 +18,7 @@ Unityプログラム授業
 Unityの3D物理演算（Rigidbody）を利用した、
 Unity基礎学習向けの回避アクションゲームです。
 
----
+
 
 # 基本ルール
 
@@ -29,7 +28,7 @@ Unity基礎学習向けの回避アクションゲームです。
 * HPが0になるとゲームオーバー
 * ゴールに到達するとクリア
 
----
+
 
 # 使用環境
 
@@ -39,32 +38,32 @@ Unity基礎学習向けの回避アクションゲームです。
 * TextMeshPro
 * 3D Physics（Rigidbody）
 
----
+
 
 # シーン構成
 
-| Scene    | 内容      |
-| -------- | ------- |
-| Title    | タイトル画面  |
-| Game     | ゲーム本編   |
-| GameOver | ゲームオーバー |
-| Clear    | クリア画面   |
+ Scene     内容      
 
----
+Title    タイトル画面  
+Game   　ゲーム本編  
+GameOver ゲームオーバー 
+Clear    クリア画面   
+
+
 
 # 主なスクリプト
 
-| Script                | 内容        |
-| --------------------- | --------- |
-| Spawner.cs            | 雨Prefab生成 |
-| EnemyPrefab.cs        | 落下物制御     |
-| PlayerController.cs   | プレイヤー移動   |
-| PlayerHP.cs           | HP管理      |
-| SceneButton.cs        | ボタンシーン遷移  |
-| SceneChangeTrigger.cs | ゴール判定     |
-| BGMManager.cs         | BGM再生     |
+Script                 内容        
 
----
+Spawner.cs             雨Prefab生成 
+EnemyPrefab.cs         落下物制御     
+PlayerController.cs    プレイヤー移動   
+PlayerHP.cs            HP管理      
+SceneButton.cs         ボタンシーン遷移  
+SceneChangeTrigger.cs 　ゴール判定     
+BGMManager.cs          BGM再生     
+
+
 
 # プレイヤー仕様
 
@@ -91,7 +90,7 @@ rb.linearVelocity = new Vector3(
 );
 ```
 
----
+
 
 ## ジャンプ
 
@@ -111,7 +110,7 @@ public void OnJump(InputAction.CallbackContext context)
 }
 ```
 
----
+
 
 ## 接地判定
 
@@ -121,7 +120,7 @@ GroundタグとのCollision判定を利用。
 OnCollisionEnter()
 ```
 
----
+
 
 # 雨生成仕様
 
@@ -135,7 +134,7 @@ Instantiate(prefabs[index], spawnPos, Quaternion.identity);
 BoxCollider範囲を利用して
 ランダム座標を決定。
 
----
+
 
 # ゴール判定
 
@@ -151,14 +150,14 @@ Playerが接触すると：
 SceneManager.LoadScene("Clear");
 ```
 
----
+
 
 # ゲームオーバー条件
 
 * HPが0になる
 * 危険な雨に接触し続ける
 
----
+
 
 # 今後の追加予定
 
