@@ -7,33 +7,28 @@ public class PlayerHP : MonoBehaviour
     public int maxHP = 100;
     public int currentHP;
 
-    public int damageAmount = 5;
+    public int damageAmount = 5; // 落下Prefabからのダメージ
+    public float damageInterval = 1f; // 1秒間隔でダメージ
 
-    // HP表示用
     public TextMeshProUGUI hpText;
 
-    // ダメージ間隔
-    public float damageInterval = 1f;
-
     private float nextDamageTime;
-
     public string gameOverSceneName = "GameOver";
 
     private void Start()
     {
         currentHP = maxHP;
-
         UpdateHPText();
     }
 
-    private void OnTriggerStay(Collider other)
+    // EnemyタグのPrefabに触れている間
+    private void OnCollisionStay(Collision collision)
     {
-        if (other.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             if (Time.time >= nextDamageTime)
             {
                 TakeDamage(damageAmount);
-
                 nextDamageTime = Time.time + damageInterval;
             }
         }
@@ -42,10 +37,7 @@ public class PlayerHP : MonoBehaviour
     void TakeDamage(int damage)
     {
         currentHP -= damage;
-
-        // HP表示更新
         UpdateHPText();
-
         Debug.Log("Player HP : " + currentHP);
 
         if (currentHP <= 0)
@@ -56,7 +48,8 @@ public class PlayerHP : MonoBehaviour
 
     void UpdateHPText()
     {
-        hpText.text = "HP : " + currentHP;
+        if (hpText != null)
+            hpText.text = "HP : " + currentHP;
     }
 
     void Die()
