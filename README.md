@@ -6,7 +6,7 @@ Unity 6 + URP + 新 Input System を使用した
 空から大量に降ってくる危険な雨を避けながら、
 ゴール地点を目指します。
 
-専門学校向け Unityプログラム授業
+Unityプログラム授業
 「Unity Game A Week」向け教材として制作しています。
 
 ---
@@ -31,7 +31,7 @@ Unity基礎学習向けの回避アクションゲームです。
 
 ---
 
-# 🛠 使用環境
+# 使用環境
 
 * Unity 6
 * URP
@@ -70,6 +70,17 @@ Unity基礎学習向けの回避アクションゲームです。
 
 ## 移動
 
+新 Input System の
+`InputAction.CallbackContext`
+を利用して入力取得。
+
+```csharp
+public void OnMove(InputAction.CallbackContext context)
+{
+    moveInput = context.ReadValue<Vector2>();
+}
+```
+
 Rigidbody の velocity を利用して移動。
 
 ```csharp
@@ -84,14 +95,20 @@ rb.linearVelocity = new Vector3(
 
 ## ジャンプ
 
-Impulse風の速度変更でジャンプ。
+Input System のボタン入力でジャンプ。
 
 ```csharp
-rb.linearVelocity = new Vector3(
-    rb.linearVelocity.x,
-    jumpForce,
-    rb.linearVelocity.z
-);
+public void OnJump(InputAction.CallbackContext context)
+{
+    if (context.performed && isGrounded)
+    {
+        rb.linearVelocity = new Vector3(
+            rb.linearVelocity.x,
+            jumpForce,
+            rb.linearVelocity.z
+        );
+    }
+}
 ```
 
 ---
